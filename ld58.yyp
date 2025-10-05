@@ -45,6 +45,7 @@
     {"id":{"name":"mm","path":"rooms/mm/mm.yy",},},
     {"id":{"name":"one","path":"rooms/one/one.yy",},},
     {"id":{"name":"two","path":"rooms/two/two.yy",},},
+    {"id":{"name":"basic1","path":"sounds/basic1/basic1.yy",},},
     {"id":{"name":"firetest","path":"sprites/firetest/firetest.yy",},},
     {"id":{"name":"player1","path":"sprites/player1/player1.yy",},},
     {"id":{"name":"sstart","path":"sprites/sstart/sstart.yy",},},
