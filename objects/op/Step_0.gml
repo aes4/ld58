@@ -53,7 +53,7 @@ function neww(){
     }
 }
 
-neww()
+//neww()
 
 function topdown(){
     switch(keyboard_key){
@@ -96,6 +96,28 @@ function topdown(){
     }
 }
 //topdown()
+if instance_exists(oplayer) {
+    if (oplayer.y < 0) {
+        oplayer.y += room_height
+        room_goto(two) //todo function to swap between two rooms
+        roomcount += 1
+    }
+    if (oplayer.x > rw) {
+        oplayer.x -= rw
+        room_goto(two) //todo function to swap between two rooms
+        roomcount += 1
+    }
+    if (oplayer.y > rh) {
+        oplayer.y -= rh
+        room_goto(two) //todo function to swap between two rooms
+        roomcount += 1
+    }
+    if (oplayer.x < 0) {
+        oplayer.x += rw
+        room_goto(two) //todo function to swap between two rooms
+        roomcount += 1
+    }
+}
 /*
 switch(dir){ // remove when angle dir
     case 0:
