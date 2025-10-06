@@ -30,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sstart",
-    "path":"sprites/sstart/sstart.yy",
+    "name":"tstart",
+    "path":"sprites/tstart/tstart.yy",
   },
   "spriteMaskId":null,
   "visible":true,

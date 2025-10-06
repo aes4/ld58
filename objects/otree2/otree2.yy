@@ -28,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"stree2",
-    "path":"sprites/stree2/stree2.yy",
+    "name":"stree",
+    "path":"sprites/stree/stree.yy",
   },
   "spriteMaskId":null,
   "visible":true,

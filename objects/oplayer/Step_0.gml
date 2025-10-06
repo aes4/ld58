@@ -89,12 +89,12 @@ if (!keyboard_check(vk_space) && !ihopping){
 
 if (mouse_check_button_pressed(mb_left)) {
     if (!instance_exists(beambox)){
-        beambox = instance_create_layer(x, y, "Instancesn", obeambox)
+        //beambox = instance_create_layer(x, y, "Instances", obeambox)
     }
 }
 if (mouse_check_button_released(mb_left)) {
     if (instance_exists(beambox)){
-        with (beambox) instance_destroy()
+        //with (beambox) instance_destroy()
         beambox = noone
     }
 }
