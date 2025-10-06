@@ -1,0 +1,11 @@
+draw_set_font(fn)
+fs = font_get_size(fn)
+draw_set_alpha(1)
+draw_set_color(c_black)
+draw_rectangle(x - w/2, y - h/2, x + w/2, y + h/2, false)
+draw_set_color(make_color_rgb(36, 38, 128))
+kx = x - w/2 + value * w
+draw_circle(kx, y, r, false)
+draw_set_color(c_ltgrey)
+draw_text(x - w/2, y - (fs + 12), "Volume")
+draw_text(x + w/2 + 24, y - fs/2, string(floor(value*100)) + "%")

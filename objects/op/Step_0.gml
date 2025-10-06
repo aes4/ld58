@@ -1,3 +1,11 @@
+show_debug_message(instance_exists(obeamh))
+// for testing
+if (keyboard_check_pressed(ord("V"))) {
+    for (i = 0; i < 5; i += 1) {
+        op.inv[i] = op.items[i]
+    }
+}
+
 function rr(a, b){
     return random_range(a, b)
 }
@@ -6,115 +14,57 @@ function dirtovec(i){
     return [dcos(i), -dsin(i)]
 }
 
+if (!audio_is_playing(a)) {
+    a = audio_play_sound(basic1, 0, true)
+    audio_sound_gain(a, vol, 0)
+}
+
 if (start == true){
     room_goto(one)
     roomcount += 1
     start = false
-}
-
-function neww(){
-    vx = 0
-    vy = 0
-    pdir = dir
-    dir = point_direction(px, py, mouse_x, mouse_y)
-    if (keyboard_check(ord("W"))) {
-        i = dirtovec(dir)
-        vx += i[0] * movevel
-        vy += i[1] * movevel
-    }
-    kd = keyboard_check(ord("D"))
-    ka = keyboard_check(ord("A"))
-    side = (kd ? 1 : 0) - (ka ? 1 : 0) //+1-1
-    if (side != 0) {
-        sidedir = dir + side * 90
-        s = dirtovec(sidedir)
-        vx += s[0] * sidevel
-        vy += s[1] * sidevel
-    }
-    ex += vx
-    ey += vy
-    if (!keyboard_check(ord("W"))) {
-        fr = max(0, 1.0 - friction)
-        ex *= fr
-        ey *= fr
-    }
-    spd = point_distance(0, 0, ex, ey)
-    if (spd > cap) {
-        k = cap / spd
-        ex *= k
-        ey *= k
-    }
-    px += ex
-    py += ey
-    if instance_exists(oplayer){
-        oplayer.x = px
-        oplayer.y = py
-        oplayer.image_angle = dir + 90
+    if (!audio_is_playing(a)) {
+        a = audio_play_sound(basic1, 0, true)
+        audio_sound_gain(a, vol, 0)
     }
 }
 
-//neww()
 
-function topdown(){
-    switch(keyboard_key){
-        case ord("W"):
-            if (vel < velcap) {
-                vel += velstart
-                vel *= velinc
-            }
-            py -= vel
-            dir = 0
-        break
-        case ord("S"):
-            if (vel < velcap) {
-                vel += velstart
-                vel *= velinc
-            }
-            py += vel
-            dir = 2
-        break
-        case ord("A"):
-            if (vel < velcap) {
-                vel += velstart
-                vel *= velinc
-            }
-            px -= vel
-            dir = 3
-        break
-        case ord("D"):
-            if (vel < velcap) {
-                vel += velstart
-                vel *= velinc
-            }
-            px += vel
-            dir = 1
-        break
-    }
-    if instance_exists(oplayer){
-        oplayer.x = px
-        oplayer.y = py
-    }
-}
-//topdown()
 if instance_exists(oplayer) {
-    if (oplayer.y < 0) {
-        oplayer.y += room_height
-        room_goto(two) //todo function to swap between two rooms
+    if (oplayer.y < 0) { // going up
+        oplayer.y += room_height - 80
+        if room == two {
+            room_goto(one)
+        } else {
+            room_goto(two)
+        }
         roomcount += 1
     }
-    if (oplayer.x > rw) {
-        oplayer.x -= rw
-        room_goto(two) //todo function to swap between two rooms
+    if (oplayer.x > rw) { // right
+        oplayer.x -= rw - 80
+        if room == two {
+            room_goto(one)
+        } else {
+            room_goto(two)
+        }
         roomcount += 1
     }
-    if (oplayer.y > rh) {
-        oplayer.y -= rh
-        room_goto(two) //todo function to swap between two rooms
+    if (oplayer.y > rh) { // down
+        oplayer.y -= rh - 80
+        if room == two {
+            room_goto(one)
+        } else {
+            room_goto(two)
+        }
         roomcount += 1
     }
-    if (oplayer.x < 0) {
-        oplayer.x += rw
-        room_goto(two) //todo function to swap between two rooms
+    if (oplayer.x < 0) { // left
+        oplayer.x += rw - 80
+        if room == two {
+            room_goto(one)
+        } else {
+            room_goto(two)
+        }
         roomcount += 1
     }
 }
@@ -160,6 +110,35 @@ switch(roomcount){
     default:  // gen room
     break
 }
+
+if (!sellready) {
+    selltimer += 1
+    if (selltimer >= room_speed * 5) {
+        instance_create_layer(room_width - 100, 100, "Instances", osell)
+        sellready = true
+    }
+}
+
+
+if (roomcount > 0) {
+    playtime += 1
+}
+
+if (!win) {
+    if (playtime >= room_speed * 120 && salescount >= 3) {
+        win = true
+        winshow = true
+        wintimer = room_speed * 15
+    }
+}
+
+if (winshow) {
+    wintimer -= 1
+    if (wintimer <= 0) {
+        winshow = false
+    }
+}
+
 
 if (keyboard_check(ord("Z"))){
     game_end()

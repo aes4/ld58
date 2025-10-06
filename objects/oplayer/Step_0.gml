@@ -88,13 +88,20 @@ if (!keyboard_check(vk_space) && !ihopping){
 }
 
 if (mouse_check_button_pressed(mb_left)) {
-    if (!instance_exists(beambox)){
-        //beambox = instance_create_layer(x, y, "Instances", obeambox)
+    if (!instance_exists(obeam)){
+        instance_create_layer(x, y, "Instances", obeam)
+    }
+    if (!instance_exists(obeamh)){
+        instance_create_layer(x, y, "Instances", obeamh)
     }
 }
+/*
 if (mouse_check_button_released(mb_left)) {
-    if (instance_exists(beambox)){
-        //with (beambox) instance_destroy()
-        beambox = noone
+    if (instance_exists(obeamh)){
+        instance_destroy(obeamh)
+    }
+    if (instance_exists(obeam)){
+        instance_destroy(obeam)
     }
 }
+*/
