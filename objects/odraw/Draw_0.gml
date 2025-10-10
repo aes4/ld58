@@ -3,10 +3,16 @@ for (i = 0; i < 5; i += 1) {
     sy = 100
     draw_sprite(sinv, 0, sx, sy)
     if (op.inv[i] != noone) {
+		spr = object_get_sprite(op.inv[i])
+		if spr != -1 {
+			draw_sprite(spr, 0, sx, sy)
+		}
+		/* bug fix never do again never create a instance in a draw
         temp = instance_create_layer(x, y, "Instances", op.inv[i])
         spr = op.inv[i].sprite_index
         instance_destroy(temp)
         draw_sprite(spr, 0, sx, sy)
+		*/
     }
 }
 draw_set_font(fn)
